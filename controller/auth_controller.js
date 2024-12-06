@@ -1,20 +1,46 @@
 let database = require("../database");
 
 let authController = {
-  login: (req, res) => {
-    res.render("auth/login");
-  },
-
   register: (req, res) => {
     res.render("auth/register");
   },
 
-  loginSubmit: (req, res) => {
-    // implement
+
+  login: (req, res) => {
+    res.render("auth/login");
   },
 
+
   registerSubmit: (req, res) => {
-    // implement
+    let { email, password } = req.body;
+
+  
+    if (database[email]) {
+      return res.status(400).send("User already exists");
+    }
+
+    
+    database[email] = {
+      email: email,
+      password: password, 
+    };
+
+    res.redirect("/login");
+  },
+
+  
+  loginSubmit: (req, res) => {
+    let { email, password } = req.body;
+
+    
+    let user = database[email];
+    if (!user || user.password !== password) {
+      return res.status(400).send("Invalid email or password");
+    }
+
+    
+    req.session.user = user;
+    res.redirect("/reminders");
   },
 };
 
