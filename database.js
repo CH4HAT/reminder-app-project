@@ -1,17 +1,25 @@
-let Database = {
-  cindy: {
+let database = {
+  "cindy@example.com": {
     reminders: [
       {
         id: 1,
-        title: "buy milk",
-        description: "go to safeway and buy milk",
+        title: "Buy Milk",
+        description: "Go to Safeway and buy milk",
         completed: false,
       },
     ],
   },
-  alex: {
-    reminders: [],
+  "alex@example.com": {
+    reminders: [
+      {
+        id: 1,
+        title: "Buy Eggs",
+        description: "Pick up eggs from the store",
+        completed: false,
+      },
+    ],
   },
 };
 
-module.exports = Database;
+
+module.exports = database;
